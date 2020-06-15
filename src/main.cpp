@@ -25,7 +25,7 @@ void emitMultipleSignals(uint n)
 
 inline void morse_SHORT(void)
 {
-    emitMultipleSignals(100);
+    emitMultipleSignals(1000000);
     delayMicroseconds(100);
 }
 
@@ -53,11 +53,13 @@ void alarm(void)
 void ICACHE_RAM_ATTR leftBtnCallback(void)
 {
     Serial.println("L");
+    alarm();
 }
 
 void ICACHE_RAM_ATTR rightBtnCallback(void)
 {
     Serial.println("R");
+    alarm();
 }
 void setup()
 {
