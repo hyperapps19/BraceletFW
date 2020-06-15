@@ -34,12 +34,8 @@ private:
         if ((millis() - previousTime) > DEBOUNCE_INTERVAL_MS)
         {
             if (deTwicer)
-            {
                 callbackF();
-                deTwicer = false;
-            }
-            else
-                deTwicer = true;
+            deTwicer = !deTwicer;
         }
         previousTime = millis();
     }

@@ -1,6 +1,11 @@
 #include <Arduino.h>
+#include <ButtonHandler.cpp>
+
 #define LEFT_BTN D6
 #define RIGHT_BTN D5
+
+ButtonHandler left(LEFT_BTN);
+ButtonHandler right(RIGHT_BTN);
 
 const int trigPin = D7;
 
@@ -48,21 +53,17 @@ void alarm(void)
 void ICACHE_RAM_ATTR leftBtnCallback(void)
 {
     Serial.println("L");
-    detachInterrupt(digitalPinToInterrupt(LEFT_BTN));
 }
 
 void ICACHE_RAM_ATTR rightBtnCallback(void)
 {
     Serial.println("R");
-    detachInterrupt(digitalPinToInterrupt(RIGHT_BTN));
 }
 void setup()
 {
     Serial.begin(115200);
-    pinMode(LEFT_BTN, INPUT_PULLUP);
-    pinMode(RIGHT_BTN, INPUT_PULLUP);
-    attachInterrupt(digitalPinToInterrupt(LEFT_BTN), leftBtnCallback, RISING);
-    attachInterrupt(digitalPinToInterrupt(RIGHT_BTN), rightBtnCallback, RISING);
+    left.setCallback(leftBtnCallback);
+    right.setCallback(rightBtnCallback);
 }
 
 void loop()
